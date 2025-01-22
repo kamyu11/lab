@@ -6,12 +6,17 @@ import os
 # 환경 변수 로드
 load_dotenv()
 
-# OpenAI API 키 설정
-api_key = "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"
-openai = OpenAI(api_key=api_key)
-
-# 챗봇 이름
+# Streamlit UI 설정
 st.title("나의 챗봇")
+
+# 사이드바에 OpenAI API 키 입력 필드 생성
+api_key = st.sidebar.text_input("OpenAI API Key", type="password")
+
+# OpenAI API 클라이언트 초기화
+if api_key:
+    openai = OpenAI(api_key=api_key)
+else:
+    st.sidebar.warning("API 키를 입력하세요.")
 
 # 대화 기록 저장
 if 'chat_history' not in st.session_state:
@@ -21,7 +26,7 @@ if 'chat_history' not in st.session_state:
 user_input = st.text_input("질문을 입력하세요", label_visibility="collapsed")
 
 # 사용자 입력 처리
-if user_input:
+if user_input and api_key:
     # 대화 기록에 사용자 입력 추가
     st.session_state['chat_history'].append({"role": "user", "content": user_input})
 
