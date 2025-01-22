@@ -7,7 +7,7 @@ import os
 load_dotenv()
 
 # OpenAI API 키 설정
-api_key = os.getenv("OPENAI_API_KEY")
+api_key = "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"
 openai = OpenAI(api_key=api_key)
 
 # 챗봇 이름
