@@ -38,7 +38,7 @@ if user_input and api_key:
         )
 
         # AI 응답 추가
-        ai_response = response.choices[0].message['content']
+        ai_response = response.choices[0].message.content
         st.session_state['chat_history'].append({"role": "assistant", "content": ai_response})
     except Exception as e:
         st.error(f"오류가 발생했습니다: {e}")
